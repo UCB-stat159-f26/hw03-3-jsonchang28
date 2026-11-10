@@ -120,3 +120,18 @@ def _calculate_age_difference(df):
     df["age_diff"] = df["player_age"] - df["opponent_age"]
 
     return df
+
+
+def _clean_data(df):
+    # Make a copy of the DataFrame
+    df = df.copy()
+
+    # Remove rows with missing age or date information
+    df = df.dropna(
+        subset=["date", "player_age", "opponent_age"]
+    )
+
+    # Keep only wins and losses
+    df = df[df["result"].isin(["W", "L"])]
+
+    return df
