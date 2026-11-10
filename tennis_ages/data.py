@@ -2,6 +2,7 @@ import requests
 import re
 import json
 import pandas as pd
+from bs4 import BeautifulSoup
 
 def _download_matches(player_name):
     # Remove spaces from the player's name
