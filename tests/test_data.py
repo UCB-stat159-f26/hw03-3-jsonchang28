@@ -41,3 +41,17 @@ def test_male_opponent_age():
 
     assert result["opponent_age"].iloc[0] == 25.5
 
+
+from tennis_ages.data import _calculate_age_difference
+
+def test_age_difference():
+    # Sample player and opponent ages
+    df = pd.DataFrame({
+        "player_age": [20, 25, 30],
+        "opponent_age": [25, 20, 30]
+    })
+
+    result = _calculate_age_difference(df)
+
+    assert result["age_diff"].tolist() == [-5, 5, 0]
+
