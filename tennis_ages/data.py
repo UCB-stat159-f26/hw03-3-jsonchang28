@@ -32,3 +32,30 @@ def _parse_matches(js_data):
     matches, _ = json.JSONDecoder().raw_decode(js_data[start:])
 
     return matches
+
+
+def _extract_columns(matches):
+    # Columns we want to keep
+    columns = [
+        "date",
+        "tournament",
+        "surface",
+        "result",
+        "opponent",
+        "opponent_info"
+    ]
+
+    rows = []
+
+    # Extract the relevant information from each match
+    for match in matches:
+        rows.append([
+            match[0],   # Match date
+            match[1],   # Tournament
+            match[2],   # Surface
+            match[4],   # Win or loss
+            match[11],  # Opponent's name
+            match[16]   # Opponent's DOB (female) or age (male)
+        ])
+
+    return pd.DataFrame(rows, columns=columns)
