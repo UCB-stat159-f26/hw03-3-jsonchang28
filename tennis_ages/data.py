@@ -191,3 +191,22 @@ def _download_profile(player_name, gender):
     response.raise_for_status()
 
     return response.text
+
+
+def _extract_birthday(html):
+    # Convert HTML into readable text
+    soup = BeautifulSoup(html, "html.parser")
+    text = soup.get_text(" ", strip=True)
+
+    # Find a birthday in the profile's Age field
+    match = re.search(
+        r"Age:\s*\d+\s*\((\d{1,2}-[A-Za-z]{3}-\d{4})\)",
+        text
+    )
+
+    if match is None:
+        raise ValueError("Could not find player's birthday")
+
+    # Convert the birthday to YYYY-MM-DD
+    birthday = pd.to_datetime(match.group(1), format="%d-%b-%Y")
+    return birthday.strftime("%Y-%m-%d")
