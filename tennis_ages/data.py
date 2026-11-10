@@ -87,24 +87,21 @@ def _calculate_player_age(df, player_dob):
 
 
 def _calculate_opponent_age(df, gender):
-    # Make a copy of the DataFrame
     df = df.copy()
 
     if gender == "female":
         # Convert opponent birthdays to dates
         opponent_dob = pd.to_datetime(
-            df["opponent_info"],
-            format="%Y%m%d",
-            errors="coerce"
+            df["opponent_info"], format="%Y%m%d", errors="coerce"
         )
 
-        # Calculate opponent's age at each match
+        # Calculate age at each match
         df["opponent_age"] = (
             (df["date"] - opponent_dob).dt.days / 365.25
         )
 
     elif gender == "male":
-        # Opponent age is already provided
+        # Age is already provided
         df["opponent_age"] = pd.to_numeric(
             df["opponent_info"], errors="coerce"
         )
