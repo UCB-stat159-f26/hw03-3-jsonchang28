@@ -110,3 +110,13 @@ def _calculate_opponent_age(df, gender):
         raise ValueError("Gender must be 'female' or 'male'")
 
     return df
+
+
+def _calculate_age_difference(df):
+    # Make a copy of the DataFrame
+    df = df.copy()
+
+    # Calculate the age difference
+    df["age_diff"] = df["player_age"] - df["opponent_age"]
+
+    return df
