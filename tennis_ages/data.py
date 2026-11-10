@@ -12,6 +12,10 @@ def _download_matches(player_name):
 
     # Download the data
     response = requests.get(url, timeout=30)
+
+    if response.status_code == 404:
+        raise ValueError(f"Player '{player_name}' not found")
+
     response.raise_for_status()
 
     # Return the JavaScript content
