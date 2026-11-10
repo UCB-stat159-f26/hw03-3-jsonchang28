@@ -175,3 +175,19 @@ def get_player_matches(player_name):
     df = _clean_data(df)
 
     return df
+
+
+def _download_profile(player_name, gender):
+    # Format the player's name
+    name = "".join(word[0].upper() + word[1:]
+                   for word in player_name.split())
+
+    # Female and male profiles use different URLs
+    page = "wplayer.cgi" if gender == "female" else "player.cgi"
+
+    # Download the profile page
+    url = f"https://www.tennisabstract.com/cgi-bin/{page}?p={name}"
+    response = requests.get(url, timeout=30)
+    response.raise_for_status()
+
+    return response.text
