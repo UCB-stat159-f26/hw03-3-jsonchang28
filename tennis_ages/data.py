@@ -59,3 +59,15 @@ def _extract_columns(matches):
         ])
 
     return pd.DataFrame(rows, columns=columns)
+
+
+def _convert_dates(df):
+    # Make a copy so we don't change the original DataFrame
+    df = df.copy()
+
+    # Convert the match date into datetime
+    df["date"] = pd.to_datetime(
+        df["date"], format="%Y%m%d", errors="coerce"
+    )
+
+    return df
