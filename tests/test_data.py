@@ -55,3 +55,22 @@ def test_age_difference():
 
     assert result["age_diff"].tolist() == [-5, 5, 0]
 
+
+
+from tennis_ages.data import _clean_data
+
+def test_clean_data():
+    # Sample data with missing values and invalid results
+    df = pd.DataFrame({
+        "date": ["2020-01-01"] * 4,
+        "player_age": [20, 21, 22, 23],
+        "opponent_age": [25, None, 19, 24],
+        "result": ["W", "L", "R", "L"]
+    })
+
+    result = _clean_data(df)
+
+    assert len(result) == 2
+    assert result["result"].tolist() == ["W", "L"]
+
+
