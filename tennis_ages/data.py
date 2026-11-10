@@ -1,6 +1,7 @@
 import requests
 import re
 import json
+import pandas as pd
 
 def _download_matches(player_name):
     # Remove spaces from the player's name
