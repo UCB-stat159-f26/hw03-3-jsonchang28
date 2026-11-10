@@ -154,12 +154,16 @@ def _get_player_info(player_name):
 
 
 def get_player_matches(player_name):
-    # Get the player's birthday and gender
-    player_dob, gender = _get_player_info(player_name)
-
     # Download and extract the matches
     js_data = _download_matches(player_name)
     matches = _parse_matches(js_data)
+
+    # Automatically detect the data format
+    gender = _detect_data_format(matches)
+
+    # Download the player's profile and extract birthday
+    html = _download_profile(player_name, gender)
+    player_dob = _extract_birthday(html)
 
     # Create the DataFrame and convert dates
     df = _extract_columns(matches)
