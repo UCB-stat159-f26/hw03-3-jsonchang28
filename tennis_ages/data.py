@@ -193,20 +193,6 @@ def _extract_birthday(html):
     return birthday.strftime("%Y-%m-%d")
 
 
-def _detect_player_gender(player_name):
-    # Try finding a female player's profile first
-    for gender in ["female", "male"]:
-        html = _download_profile(player_name, gender)
-
-        try:
-            _extract_birthday(html)
-            return gender
-        except ValueError:
-            continue
-
-    raise ValueError(f"Player '{player_name}' not found")
-
-
 def _detect_data_format(matches):
     # Look for an opponent with available age information
     for match in matches:
