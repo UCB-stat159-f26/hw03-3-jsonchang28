@@ -1,5 +1,4 @@
-from tennis_ages.data 
-import _parse_matches
+from tennis_ages.data import _parse_matches
 
 
 def test_parse_matches():
