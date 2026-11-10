@@ -217,3 +217,22 @@ def _detect_player_gender(player_name):
             continue
 
     raise ValueError(f"Player '{player_name}' not found")
+
+
+def _detect_data_format(matches):
+    # Look for an opponent with available age information
+    for match in matches:
+        info = match[16]
+
+        if not info:
+            continue
+
+        # Female data contains an 8-digit birthday
+        if re.fullmatch(r"\d{8}", info):
+            return "female"
+
+        # Male data contains a decimal age
+        if re.fullmatch(r"\d+\.\d+", info):
+            return "male"
+
+    raise ValueError("Could not determine match data format")
