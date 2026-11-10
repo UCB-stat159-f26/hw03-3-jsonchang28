@@ -20,3 +20,24 @@ def plot_age_comparison(df):
                label="Match lost")
 
     return fig
+
+
+def _style_plot(ax):
+    # Horizontal line where players are the same age
+    ax.axhline(0, color="gray", linewidth=1)
+
+    # Axis labels
+    ax.set_xlabel("Player's age")
+    ax.set_ylabel("Player age - Opponent age")
+
+    # Add grid and remove borders
+    ax.grid(True, color="#d9d9d9", linewidth=0.8)
+    ax.set_axisbelow(True)
+
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+
+    # Add legend
+    ax.legend()
+
+    return ax
