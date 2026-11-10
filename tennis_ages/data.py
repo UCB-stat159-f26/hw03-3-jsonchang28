@@ -151,3 +151,26 @@ def _get_player_info(player_name):
         raise ValueError(f"Player '{player_name}' not found")
 
     return players[name]
+
+
+def get_player_matches(player_name):
+    # Get the player's birthday and gender
+    player_dob, gender = _get_player_info(player_name)
+
+    # Download and extract the matches
+    js_data = _download_matches(player_name)
+    matches = _parse_matches(js_data)
+
+    # Create the DataFrame and convert dates
+    df = _extract_columns(matches)
+    df = _convert_dates(df)
+
+    # Calculate player and opponent ages
+    df = _calculate_player_age(df, player_dob)
+    df = _calculate_opponent_age(df, gender)
+
+    # Calculate age difference and clean the data
+    df = _calculate_age_difference(df)
+    df = _clean_data(df)
+
+    return df
