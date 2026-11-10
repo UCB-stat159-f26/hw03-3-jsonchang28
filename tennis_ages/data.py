@@ -1,4 +1,6 @@
 import requests
+import re
+import json
 
 def _download_matches(player_name):
     # Remove spaces from the player's name
@@ -13,3 +15,19 @@ def _download_matches(player_name):
 
     # Return the JavaScript content
     return response.text
+
+
+def _parse_matches(js_data):
+    # Find the match data in the JavaScript file
+    match = re.search(r"var\s+morematchmx\s*=", js_data)
+
+    if match is None:
+        raise ValueError("Could not find match data in JS file")
+
+    # Find the beginning of the match array
+    start = js_data.index("[", match.end())
+
+    # Convert the JavaScript array into a Python list
+    matches, _ = json.JSONDecoder().raw_decode(js_data[start:])
+
+    return matches
