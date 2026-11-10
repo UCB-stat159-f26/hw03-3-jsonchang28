@@ -2,7 +2,7 @@ import requests
 
 def _download_matches(player_name):
     # Remove spaces from the player's name
-    name = player_name.replace(" ", "")
+    name = "".join(word.capitalize() for word in player_name.split())
 
     # Create the URL for the player's career data
     url = f"https://www.tennisabstract.com/jsmatches/{name}Career.js"
