@@ -19,6 +19,8 @@ def plot_age_comparison(df):
                s=18, color="#E82C8A", alpha=0.85,
                label="Match lost")
 
+    # Apply the graph styling
+    _style_plot(ax)
     return fig
 
 
