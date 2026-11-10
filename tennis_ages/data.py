@@ -137,22 +137,6 @@ def _clean_data(df):
     return df
 
 
-def _get_player_info(player_name):
-    # Temporary player information for testing
-    players = {
-        "SerenaWilliams": ("1981-09-26", "female"),
-        "RafaelNadal": ("1986-06-03", "male")
-    }
-
-    name = "".join(word[0].upper() + word[1:]
-                   for word in player_name.split())
-
-    if name not in players:
-        raise ValueError(f"Player '{player_name}' not found")
-
-    return players[name]
-
-
 def get_player_matches(player_name):
     # Download and extract the matches
     js_data = _download_matches(player_name)
