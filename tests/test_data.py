@@ -27,3 +27,17 @@ def test_female_opponent_age():
     result = _calculate_opponent_age(df, "female")
 
     assert round(result["opponent_age"].iloc[0], 2) == 20.00
+
+
+
+def test_male_opponent_age():
+    # Male match data already includes opponent age
+    df = pd.DataFrame({
+        "date": [pd.Timestamp("2000-01-01")],
+        "opponent_info": ["25.5"]
+    })
+
+    result = _calculate_opponent_age(df, "male")
+
+    assert result["opponent_age"].iloc[0] == 25.5
+
