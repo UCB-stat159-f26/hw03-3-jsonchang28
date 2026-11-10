@@ -71,3 +71,16 @@ def _convert_dates(df):
     )
 
     return df
+
+
+def _calculate_player_age(df, player_dob):
+    # Make a copy of the DataFrame
+    df = df.copy()
+
+    # Convert the player's birthday to datetime
+    birthday = pd.to_datetime(player_dob)
+
+    # Calculate the player's age at each match
+    df["player_age"] = (df["date"] - birthday).dt.days / 365.25
+
+    return df
