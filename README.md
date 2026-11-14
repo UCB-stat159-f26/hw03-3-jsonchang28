@@ -102,3 +102,9 @@ python -m pytest tests/ -v
 ## Data Source
 
 All tennis match data comes from [Tennis Abstract](https://www.tennisabstract.com/).
+
+
+## Personal Reflection
+
+This homework helped me better understand how to turn code from previous assignments into a reusable Python package. One of the biggest challenges was figuring out how to retrieve and process data for both male and female tennis players, since Tennis Abstract stores their opponent age information differently. I had to adjust my functions to handle both formats while still producing the same DataFrame structure. I also learned more about organizing code into public and private functions, which made my package easier to understand and maintain. Writing automated tests was especially helpful because it allowed me to check that individual functions worked correctly without repeatedly downloading data from the website. Another important part of this assignment was learning how to package my code so that someone else could install it directly from GitHub. Overall, this homework helped me see the importance of writing reusable, organized, and well-tested code rather than just getting a script to run successfully.
+
